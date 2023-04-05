@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+
+{% block contents%}
+{% if searched_blogs %}
+  <h3> 검색하신 {{searched}}에 대한 정보입니다. </h3>
+  <br>
+  {% for blog in searched_blogs %}
+    <hr>
+    <div class="searched-blog-list-box">
+      <a href="{% url 'detail' blog.id %}" class="searched-blog">
+        <h2>{{ blog.title }}</h2>
+        <p>{{ blog.content }}</p>
+        <p>{{ created_at }}</p>
+      </a>
+    </div>
+    <br>
+  {% endfor %}
+{% else %}
+  <h1> 검색하신 블로그 정보가 없습니다. </h1>
+{% endif %}
+{% endblock %}

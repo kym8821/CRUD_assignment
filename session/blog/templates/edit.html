@@ -1,10 +1,15 @@
 <h1>edit 페이지</h1>
 
 <form method="POST" action="{% url 'update' edit_blog.id %}">
-    {% csrf_token %}
-    <input type="text" name="title" value="{{edit_blog.title}}"/>
-    <textarea name="content" id="" cols="30">{{edit_blog.content}}</textarea>
-    <input type="submit" value="수정하기">
+  <!--update로 현재 데이터를 보내는데, 이 때, edit_blog의 id를 가져가라.-->
+  {% csrf_token %}
+  <!--다른 곳으로부터의 공격을 막기 위한 csrf_token-->
+  <input type="text" name="title" value="{{edit_blog.title}}" />
+  <!--키값 : title, value = edit_blog.title-->
+  <textarea name="content" id="" cols="30">{{edit_blog.content}}</textarea>
+  <!--키값 : content 객체의 content 필드를 띄워준다.-->
+  <input type="submit" value="수정하기" />
+  <!-- value = 수정하기 -->
 </form>
 
 <a href="{% url 'home' %}">홈</a>

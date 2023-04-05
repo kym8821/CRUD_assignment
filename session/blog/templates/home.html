@@ -1,11 +1,127 @@
-<h1>LIKELION 11 Blog Project</h1>
-<a href="{%url 'new'%}">새 글 작성하기</a>
-<div>
-    {% for blog in blogs %}
-    <a href="{%url 'detail' blog.id%}">
+<link rel="stylesheet" href="./reset.css">
+
+<div class="default-setting">
+  <h1 class="site_name">LIKELION 11 Blog Project</h1>
+  {% block contents %}
+  {% for blog in blogs %}
+  <hr />
+  <a href="{%url 'detail' blog.id%}" class="searched-blog">
     <h2>{{blog.title}}</h2>
     <p>{{blog.summary}}</p>
     <p>{{blog.created_at}}</p>
-    </a>
-    {% endfor %}
+  </a>
+  <br />
+  {% endfor %}
+  {% endblock %}
+  <hr />
+  <form action="{% url 'search' %}" method="post" class="search-box">
+    {% csrf_token %}
+    <button type="submit">클릭!</button>
+    <input
+      type="search"
+      placeholder="  찾으실 내용을 입력하십시오."
+      name="searched"
+    />
+  </form>
+  <div class="tool-bar">
+    <a href="{%url 'new'%}" class="blog-creator">새 글 작성하기</a>
+    <a href="{% url 'home' %}" class="return-home">홈</a>
+    <br />
+  </div>
 </div>
+
+<style>
+  @font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .default-setting {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+  }
+
+  .site_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: inherit;
+    left: 30%;
+    width: 40%;
+    height: 5rem;
+
+    border-radius: 68px 68px 68px 68px;
+    -webkit-border-radius: 68px 68px 68px 68px;
+    -moz-border-radius: 68px 68px 68px 68px;
+
+    background-color: #ffa618;
+
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .searched-blog{
+    text-decoration: none;
+
+    border-bottom: thin solid black;
+  }
+
+  .search-box {
+    position: inherit;
+    left: 27%;
+
+    margin: 5% 0 5% 0;
+
+    font-size: 2rem;
+  }
+
+  .search-box > button {
+    width: 7%;
+    height: 4rem;
+
+    border-radius: 68px 0px 0px 68px;
+    -webkit-border-radius: 68px 0px 0px 68px;
+    -moz-border-radius: 68px 0px 0px 68px;
+  }
+
+  .search-box > input {
+    width: 40%;
+    height: 4rem;
+    border-radius: 0px 68px 68px 0px;
+    -webkit-border-radius: 0px 68px 68px 0px;
+    -moz-border-radius: 0px 68px 68px 0px;
+  }
+
+  .tool-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    font-family: 'TheJamsil5Bold';
+  }
+
+  .tool-bar > a{
+    position: relative;
+    left: 15%;
+
+    width: 17%;
+    height: 3rem;
+
+    border-radius: 68px 68px 68px 68px;
+    -webkit-border-radius: 68px 68px 68px 68px;
+    -moz-border-radius: 68px 68px 68px 68px;
+
+    background-color: #ffa618;
+
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 280%;
+    text-decoration: none;
+    color: #fff;
+  }
+</style>
